@@ -1,5 +1,6 @@
 ```puml
 left to right direction
+!theme black-knight
 
 package RenderCore{
 	class FRenderResource #orange
@@ -24,7 +25,7 @@ package RHI{
 	interface IRHICommandContext
 	interface IRHITransientResourceAllocator
 
-	object GDynamicRHI#lightgreen
+	object GDynamicRHI#green
 
 	FRHICommandBase<|--FRHICommand
 	FRHICommand<|--FRHICommandXXX
@@ -71,7 +72,7 @@ package Renderer{
 	FRenderResource<|-- RendererRRXXX
 }
 
-package D3D12RHI #lightgreen{
+package D3D12RHI #green{
 	FRHICommand<|--FD3D12RHICommandXXX
 	FDynamicRHI<|--FD3D12DynamicRHI
 	IRHICommandContext<|--FD3D12CommandContextBase
@@ -89,6 +90,7 @@ package D3D12RHI #lightgreen{
 
 ```puml
 left to right direction
+!theme blueprint
 
 package RHI{
 	class FRHIResource #red
@@ -116,7 +118,7 @@ package RHI{
 	FRHITexture<|--FRHITextureReference
 }
 
-package D3D12RHI #lightgreen{
+package D3D12RHI #green{
 	FRHISamplerState<|--FD3D12SamplerState
 	FRHIRasterizerState<|--FD3D12RasterizerState
 	FRHIDepthStencilState<|--FD3D12DepthStencilState
@@ -147,7 +149,7 @@ Engine-->RenderCore
 Engine-->RHI
 Engine-->Renderer
 
-RHI-->D3D12RHI #lightgreen:dynamic load
+RHI-->D3D12RHI #green:dynamic load
 
 Renderer-->Engine
 Renderer-->RenderCore
