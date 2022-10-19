@@ -3,23 +3,15 @@ left to right direction
 !theme black-knight
 
 package RenderCore{
-	class FRenderResource #orange
-	FRenderResource<|--FTexture
-	FRenderResource<|--FTextureReference
-	FRenderResource<|--FVertexBuffer
-	FRenderResource<|--FIndexBuffer
-	FRenderResource<|--FVertexFactory
-	FRenderResource<|--FVertexFactory
+	class FRenderResource #darkorange
 }
 
 package Engine {
 	interface FSceneInterface
-	FRenderResource<|-- EngineRRXXX
-	FRenderResource<|--FMaterialRenderProxy
 }
 
 package RHI{
-	class FRHIResource #red
+	class FRHIResource #darkred
 	class FDynamicRHI
 	interface IRHIComputeContext
 	interface IRHICommandContext
@@ -56,7 +48,6 @@ package RenderCore{
 	class FRDGBuilder
 	class FShader
 	FShader<|--FGlobalShader
-	FRenderResource<|-- RenderCoreRRXXX
 }
 
 package Renderer{
@@ -69,7 +60,6 @@ package Renderer{
 	FGlobalShader<|--FGlobalShaderXXX
 	FShader<|--FMaterialShader
 	FMaterialShader<|--FMeshMaterialShader
-	FRenderResource<|-- RendererRRXXX
 }
 
 package D3D12RHI #green{
@@ -90,10 +80,48 @@ package D3D12RHI #green{
 
 ```puml
 left to right direction
-!theme blueprint
+!theme black-knight
+
+package RenderCore{
+	class FRenderResource #darkorange
+	FRenderResource<|--FTexture
+	FRenderResource<|--FTextureReference
+	FRenderResource<|--FVertexBuffer
+	FRenderResource<|--FIndexBuffer
+	FRenderResource<|--FVertexFactory
+	FRenderResource<|--FVertexFactory
+	FRenderResource<|--TUniformBuffer
+}
+
+package Engine {
+	FRenderResource<|-- EngineRRXXX
+	FRenderResource<|--FMaterialRenderProxy
+}
 
 package RHI{
-	class FRHIResource #red
+}
+
+package RHICore{
+}
+
+package RenderCore{
+	FRenderResource<|-- RenderCoreRRXXX
+}
+
+package Renderer{
+	FRenderResource<|-- RendererRRXXX
+}
+
+package D3D12RHI #green{
+}
+
+```
+```puml
+left to right direction
+!theme black-knight
+
+package RHI{
+	class FRHIResource #darkred
 
 	FRHIResource<|--FRHISamplerState
 	FRHIResource<|--FRHIRasterizerState
