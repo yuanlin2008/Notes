@@ -122,7 +122,36 @@ package D3D12RHI #green{
 
 	FRHIBuffer<|--FD3D12Buffer
 }
+```
+
+```puml
+!theme black-knight
+title Add Primitive to FScene
+
+activate UPrimitiveComponent
+activate FScene
+
+group Game Thread
+UPrimitiveComponent -> FScene : AddPrimitive
+FScene->UPrimitiveComponent:CreateScenenProxy
+UPrimitiveComponent->FPrimitiveSceneProxy
+activate FPrimitiveSceneProxy
+FScene->FPrimitiveSceneInfo:new FPrimitiveSceneInfo
+activate FPrimitiveSceneInfo
+FScene-[#red]>AddPrimitiveCommand:ENQUEUE_RENDER_COMMAND
+activate AddPrimitiveCommand
+end
+
+group Render Thread
+AddPrimitiveCommand->FPrimitiveSceneProxy:SetTransform
+AddPrimitiveCommand->FPrimitiveSceneProxy:CreateRenderThreadResources
+AddPrimitiveCommand->FScene:AddPrimitiveSceneInfo_RenderThread
+end
 
 ```
+
 * [Unreal Engine 4 Rendering](https://medium.com/@lordned/unreal-engine-4-rendering-overview-part-1-c47f2da65346)
 * [How Create A Custom Mesh Component](https://medium.com/realities-io/creating-a-custom-mesh-component-in-ue4-part-0-intro-2c762c5f0cd6)
+
+* FRenderResource在GT创建，在RT调用
+* UStaticMesh资源管理？与Nanite关系(Engine/Renderring)
