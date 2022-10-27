@@ -88,3 +88,12 @@ $enqueue_render_command(EndFrame, "EndFrameRenderThread()")
 
 ## TickRenderingTickables()
 ## FScene::UpdateAllPrimitiveSceneInfo()
+## UGameEngine::Tick()
+```puml
+@startmindmap
+!theme black-knight
+* UGameEngine::Tick()
+@endmindmap
+```
+## FFrameEndSync::Sync()
+???
