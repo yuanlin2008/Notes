@@ -88,12 +88,18 @@ $enqueue_render_command(EndFrame, "EndFrameRenderThread()")
 
 ## TickRenderingTickables()
 ## FScene::UpdateAllPrimitiveSceneInfo()
+同步primitive添加删除和修改.
 ## UGameEngine::Tick()
 ```puml
 @startmindmap
 !theme black-knight
 * UGameEngine::Tick()
+** 更新游戏逻辑
+** RedrawAllViewports
 @endmindmap
 ```
 ## FFrameEndSync::Sync()
 ???
+
+* [RenderDoc](https://docs.unrealengine.com/4.26/en-US/TestingAndOptimization/PerformanceAndProfiling/RenderDoc/)
+* [Unreal Insight](https://docs.unrealengine.com/4.26/en-US/TestingAndOptimization/PerformanceAndProfiling/UnrealInsights/)
