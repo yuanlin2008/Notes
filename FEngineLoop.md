@@ -94,7 +94,18 @@ $enqueue_render_command(EndFrame, "EndFrameRenderThread()")
 @startmindmap
 !theme black-knight
 * UGameEngine::Tick()
-** 更新游戏逻辑
+**: Ticking Worlds
+    https://www.cnblogs.com/kekec/p/14781454.html;
+*** RunTickGroup(TG_PrePhysics)
+*** RunTickGroup(TG_StartPhysics)
+*** RunTickGroup(TG_DuringPhysics, false)
+*** RunTickGroup(TG_EndPhysics)
+*** RunTickGroup(TG_PostPhysics)
+***[#red] Tick TimerManager
+***[#red] FTickableGameObject::TickObjects
+***[#red] Update cameras and streaming volumes
+*** RunTickGroup(TG_PostUpdateWork)
+*** RunTickGroup(TG_LastDemotable)
 ** RedrawAllViewports
 @endmindmap
 ```
