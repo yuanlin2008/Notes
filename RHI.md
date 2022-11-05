@@ -1,9 +1,10 @@
+[toc]
 # RHITests
 Engine\Plugins\Tests\RHITests\Source\RHITests
 测试在FEngineLoop::PostInitRHI()中启动
 命令行参数 "rhiunittest"
 
-# IRHICommandContext
+# Overview
 ```puml
 !theme black-knight
 
@@ -64,6 +65,11 @@ package D3D12RHI #green{
 * [ ] D3D12有多个CommandContext，每个Context有自己的StateCache
 * [ ] IRHICommandContextContainer与FRHICommandListBase::QueueParallelAsyncCommandListSubmit相关.
 * [ ] FRHICommandListBase::QueueParallelAsyncCommandListSubmit与FParallelCommandListSet相关，在RDG和shadow中有使用.
+
+# RHI命令执行
+## 执行上下文.
+命令列表的最终执行在FRHICommandLIstExecutor::ExcuteInner.
+此函数有可能在GT,RT,RHIT上下文中执行，只有在RT中，命令会被推到RHIT中执行，否则就在本线程执行。
 
 # FRHIResource
 ```puml
