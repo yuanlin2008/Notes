@@ -67,7 +67,7 @@ package D3D12RHI #green{
 * [ ] FRHICommandListBase::QueueParallelAsyncCommandListSubmit与FParallelCommandListSet相关，在RDG和shadow中有使用.
 
 # RHI命令执行
-## 执行上下文.
+## 执行上下文
 命令列表的最终执行在FRHICommandLIstExecutor::ExcuteInner.
 此函数有可能在GT,RT,RHIT上下文中执行，只有在RT中，命令会被推到RHIT中执行，否则就在本线程执行。
 
@@ -123,6 +123,89 @@ package D3D12RHI #green{
 }
 
 ```
+
+# D3D12Allocation
+```puml
+!theme black-knight
+
+package RHICore {
+	class FRHIMemoryPool
+	class FRHIPoolAllocator
+}
+
+package D3D12RHI #green {
+	class FD3D12ResourceAllocator
+	class FD3D12BuddyAllocator
+	class FD3D12BaseAllocatorType #blue
+	class FD3D12MultiBuddyAllocator{
+		#TArray<FD3D12BuddyAllocator> Allocators
+	}
+	class FD3D12BucketAllocator #green
+	class FD3D12TextureAllocator #green
+	class FD3D12UploadHeapAllocator{
+		-FD3D12MultiBuddyAllocator SmallBlockAllocator
+		-FD3D12PoolAllocator BigBlockAllocator
+		-FD3D12MultiBuddyAllocator FastConstantPageAllocator
+	}
+	class FD3D12MemoryPool
+	class FD3D12PoolAllocator
+	class FD3D12BufferPool #blue
+	class FD3D12DefaultBufferAllocator{
+		-TArray<FD3D12BufferPool*> DefaultBufferPools;
+	}
+	class FD3D12FastAllocator
+	class FD3D12FastConstantAllocator
+	class FTransientUniformBufferAllocator
+	class FD3D12SegListAllocator
+	class FD3D12TextureAllocatorPool {
+		-FD3D12PoolAllocator* PoolAllocators[(int)EPoolType::Count]
+	}
+
+	class FD3D12Adapter #darkred{
+		#FD3D12UploadHeapAllocator* UploadHeapAllocator[MAX_NUM_GPUS]
+		#TArray<FTransientUniformBufferAllocator*> TransientUniformBufferAllocators;
+	}
+	class FD3D12Device #darkred{
+		#FD3D12DefaultBufferAllocator DefaultBufferAllocator
+		#FD3D12FastAllocator DefaultFastAllocator
+		#FD3D12TextureAllocatorPool TextureAllocator
+	}
+	class FD3D12ResourceLocation #darkred {
+		-FD3D12BaseAllocatorType* Allocator;
+		-FD3D12SegListAllocator* SegListAllocator;
+		-FD3D12PoolAllocator* PoolAllocator;
+	}
+
+	FD3D12ResourceAllocator<|--FD3D12BuddyAllocator
+	FD3D12ResourceAllocator<|--FD3D12MultiBuddyAllocator
+	FD3D12ResourceAllocator<|--FD3D12BucketAllocator
+	FD3D12MultiBuddyAllocator<|--FD3D12TextureAllocator
+
+	FRHIMemoryPool<|--FD3D12MemoryPool
+	FRHIPoolAllocator<|--FD3D12PoolAllocator
+	FD3D12PoolAllocator..FD3D12BufferPool
+	FD3D12BuddyAllocator..FD3D12BaseAllocatorType
+
+	FD3D12UploadHeapAllocator..*FD3D12Adapter
+	FD3D12BufferPool..*FD3D12DefaultBufferAllocator
+
+	FD3D12MultiBuddyAllocator..*FD3D12UploadHeapAllocator
+	FD3D12PoolAllocator..*FD3D12UploadHeapAllocator
+	FD3D12DefaultBufferAllocator..*FD3D12Device
+	FD3D12FastAllocator..*FD3D12Device
+	FD3D12TextureAllocatorPool..*FD3D12Device
+
+	FD3D12FastConstantAllocator<|--FTransientUniformBufferAllocator
+	FTransientUniformBufferAllocator..*FD3D12Adapter
+
+	FD3D12ResourceLocation*..FD3D12BaseAllocatorType
+	FD3D12ResourceLocation*..FD3D12SegListAllocator
+	FD3D12ResourceLocation*..FD3D12PoolAllocator
+	FD3D12TextureAllocatorPool*..FD3D12PoolAllocator
+	FD3D12MemoryPool..*FD3D12PoolAllocator
+}
+```
+
 ## ENQUEUE_RENDER_COMMAND
 
 ## FlushRenderingCommands()
