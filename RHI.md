@@ -123,6 +123,41 @@ package D3D12RHI #green{
 }
 
 ```
+# RHI Transient Resource & Allocator
+* [ ] 为RDG服务.
+
+```puml
+left to right direction
+!theme black-knight
+package RHI {
+	class FRHITransientResource #purple
+	class FRHITransientBuffer #purple
+	class FRHITransientTexture #purple
+
+	interface IRHITransientResourceAllocator
+
+	class FDynamicRHI {
+		+IRHITransientResourceAllocator* RHICreateTransientResourceAllocator()
+	}
+
+	FRHITransientResource<|--FRHITransientBuffer
+	FRHITransientResource<|--FRHITransientTexture
+	IRHITransientResourceAllocator..*FDynamicRHI
+}
+package RHICore {
+	class TRHITransientResourceCache
+	class FRHITransientResourceHeapAllocator
+	class FRHITransientResourcePageAllocator
+	IRHITransientResourceAllocator<|--FRHITransientResourceHeapAllocator
+	IRHITransientResourceAllocator<|--FRHITransientResourcePageAllocator
+}
+
+package D3D12RHI #green {
+	class FD3D12TransientResourceHeapAllocator
+
+	FRHITransientResourceHeapAllocator<|--FD3D12TransientResourceHeapAllocator
+}
+```
 
 # D3D12Allocation
 ```puml
