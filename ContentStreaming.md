@@ -56,6 +56,9 @@ class FTexturePlatformData{
 }
 ```
 ## Texture Loading
+贴图的初始loading数据.
 - UTexture2D::Serialize(FArchive& Ar)
     - UTexture::BeginCachePlatformData()
         - UTexture::CachePlatformData
+
+## Texture StreamIn
