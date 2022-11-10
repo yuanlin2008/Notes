@@ -1,64 +1,62 @@
-[toc]
 ```puml
 !theme black-knight
 
 interface IStreamingManager
 interface IRenderAssetStreamingManager
-class FRenderAssetStreamingManager
+class FRenderAssetStreamingManager {
+    +void AddStreamingRenderAsset(UStreamableRenderAsset* InAsset)
+    +void RemoveStreamingRenderAsset(UStreamableRenderAsset* RenderAsset)
+    -TArray<FStreamingRenderAsset> StreamingRenderAssets
+}
+class FStreamingRenderAsset
+note top:The streaming system's version\n of UStreamableRenderAsset
 
 IStreamingManager<|--IRenderAssetStreamingManager
 IRenderAssetStreamingManager<|--FRenderAssetStreamingManager
+FRenderAssetStreamingManager..*FStreamingRenderAsset
 
 ```
 ---
 ```puml
 !theme black-knight
-
-class UObject
-class UStreamableRenderAsset
-class UTexture
-class USkeletalMesh
 
 class FStreamableRenderResourceState
 class FRenderAssetUpdate
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+class UObject
+class UStreamableRenderAsset #red{
+    # FStreamableRenderResourceState CachedSRRState
+}
+class UTexture {
+    +FTextureResource* CreateResource()
+}
+class UTexture2D
+class USkeletalMesh
+
 UObject<|-- UStreamableRenderAsset
 UStreamableRenderAsset<|-- UTexture
+UTexture<|-- UTexture2D
 UStreamableRenderAsset<|-- USkeletalMesh
 
-```
----
-```puml
-!theme black-knight
-
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 class FRenderResource
 class FTexture
-class FStreamableTextureResource
+class FTextureResource
+class FStreamableTextureResource #red
 class FTexture2DResource
 class FTexture2DArrayResource
 class FTexture3DResource
 
 FRenderResource<|--FTexture
-FTexture<|--FStreamableTextureResource
+FTexture<|--FTextureResource
+FTextureResource<|--FStreamableTextureResource
 FStreamableTextureResource<|--FTexture2DResource
 FStreamableTextureResource<|--FTexture2DArrayResource
 FStreamableTextureResource<|--FTexture3DResource
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+FStreamableRenderResourceState*.. UStreamableRenderAsset
+
 ```
-
-# Texture
-```puml
-!theme black-knight
-
-class FTexturePlatformData{
-    +TIndirectArray<struct FTexture2DMipMap> Mips
-    +bool TryLoadMips(int32 FirstMipToLoad, void** OutMipData, FStringView DebugContext)
-}
-```
-## Texture Loading
-贴图的初始loading数据.
-- UTexture2D::Serialize(FArchive& Ar)
-    - UTexture::BeginCachePlatformData()
-        - UTexture::CachePlatformData
-
-## Texture StreamIn

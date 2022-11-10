@@ -31,7 +31,9 @@ class FTexturePlatformData{
 * 在FEngineLoop::Tick中调用ProcessAsyncTasks
 
 # UTexture::UpdateResource()
-刷新渲染资源.
+* 调用CreateResource()创建FTextureResource
+* BeginInitResource()
+* LinkStreaming()
 
 # Texture StreamIn
 
