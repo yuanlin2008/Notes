@@ -25,15 +25,22 @@ class FTexturePlatformData{
                         结束加载数据.
                     - else
                         - 加入到FTextureCompilingManager中,等待完成.
+                    
+初始加载结束后会通过CreateResource创建RHI资源。
+**如果异步加载没有完成，就使用GetDefaultTexture2D来创建RHI资源.**
 
 ## FTextureCompilingManager何时结束UTexture的loading?
 * 在FinishAllCompilation时
 * 在FEngineLoop::Tick中调用ProcessAsyncTasks
 
+异步加载完成后会调用Texture的UpdateResource
+
 # UTexture::UpdateResource()
 * 调用CreateResource()创建FTextureResource
 * BeginInitResource()
 * LinkStreaming()
+
+# RHI资源创建
 
 # Texture StreamIn
 
