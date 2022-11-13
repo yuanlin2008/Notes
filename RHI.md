@@ -241,9 +241,6 @@ package D3D12RHI #green {
 }
 ```
 
-# D3D12状态管理.
-* [ ] D3D12State.h .cpp
-
 ## ENQUEUE_RENDER_COMMAND
 
 ## FlushRenderingCommands()
