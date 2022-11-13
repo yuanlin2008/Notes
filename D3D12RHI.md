@@ -20,9 +20,8 @@ ID3D12Pageable<|--ID3D12Resource
 ID3D12Pageable<|--ID3D12StateObject
 ID3D12DeviceChild<|--ID3D12RootSignature
 ```
-
+---
 ```puml
-left to right direction
 !theme black-knight
 package RHI {
 	class FRHIResource
@@ -40,6 +39,12 @@ package RHI {
 	FRHITextureCube--|>FRHITexture
 }
 package D3D12RHI {
+	class FD3D12Buffer #darkred
+	class FD3D12Texture2D #darkred
+	class FD3D12Texture2DArray #darkred
+	class FD3D12TextureCube #darkred
+	class FD3D12Texture3D #darkred
+
 	FD3D12DeviceChild<|--FD3D12BaseShaderResource
 	FD3D12BaseShaderResource<|--FD3D12Buffer
 	FD3D12Buffer--|>FRHIBuffer
