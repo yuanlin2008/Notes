@@ -44,8 +44,19 @@ package D3D12RHI {
 	class FD3D12Texture2DArray #darkred
 	class FD3D12TextureCube #darkred
 	class FD3D12Texture3D #darkred
+	class FD3D12ResourceLocation {
+		-FD3D12BaseShaderResource Owner
+		-FD3D12Resource UnderlyingResource
+	}
+	class FD3D12BaseShaderResource {
+		+FD3D12ResourceLocation ResourceLocation
+	}
 
 	FD3D12DeviceChild<|--FD3D12BaseShaderResource
+	FD3D12DeviceChild<|--FD3D12Resource
+	FD3D12DeviceChild<|--FD3D12ResourceLocation
+	FD3D12Resource.*FD3D12ResourceLocation
+	FD3D12ResourceLocation*.*FD3D12BaseShaderResource
 	FD3D12BaseShaderResource<|--FD3D12Buffer
 	FD3D12Buffer--|>FRHIBuffer
 	FD3D12BaseShaderResource<|--FD3D12TextureBase
