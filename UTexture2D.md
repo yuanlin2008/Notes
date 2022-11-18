@@ -62,6 +62,7 @@ FTexturePlatformData.* UTexture2D
 * LinkStreaming()
 
 # FTexture2DResource
+[FRenderResource](./FRenderResource.md)
 ## FTexture2DResource创建两种模式
 * 正常模式
 * 代理模式:使用另一个贴图的FTexture2DResource,用来处理一部加在未完成状态，使用系统默认贴图.
