@@ -27,5 +27,5 @@ FRenderResource<|--TU
 FRHIUniformBuffer..*TU
 
 ```
-
+* [ ] IMPLEMENT_STATIC_UNIFORM_BUFFER_SLOT
 * [虚幻4 高级数据传输UniformBuffer](https://zhuanlan.zhihu.com/p/36696626)
