@@ -29,6 +29,14 @@ FMeshBatch-->FMeshDrawCommand
 
 # FPrimitiveSceneProxy/FPrimitiveSceneInfo==>FMeshBatch
 ## FPrimitiveSceneInfo::AddToScene
+* 调用FPrimitiveSceneInfo::AddStaticMeshes为StaticMesh添加FMeshBatch和FMeshDrawCommand,并缓存起来
+
+## FPrimitiveSceneInfo::AddStaticMeshes
+* 调用FPrimitiveSceneProxy->DrawStaticElements,创建FMeshBatch(FStaticMeshBatch)并保存到FPrimitiveSceneInfo->StaticMeshes
+* 将FMeshBatch保存到FScene->StaticMeshes中，并将此数组id保存到FStaticMeshBatch和FStaticMeshBatchRelevance的id中
+* 调用CacheMeshDrawCommands缓存FMeshDrawCommand
+
+* [ ] FStaticMeshSceneProxy::DrawStaticElements
 
 
 # References
