@@ -11,33 +11,58 @@ UPrimitiveComponent-->P
 P-->FMeshBatch
 FMeshBatch-->FMeshDrawCommand
 ```
-# UPrimitiveComponent==>FPrimitiveSceneProxy/FPrimitiveSceneInfo
-## FScene::AddPrimitive
-* 创建FPrimitiveSceneProxy和FPrimitiveSceneInfo，并相互引用
-* RT:SceneProxy->CreateRenderThreadResources()
-* RT:Scene->AddPrimitiveSceneInfo_RenderThread
+# 基本数据类型
+## FScene
+```puml
+!theme black-knight
+class FScene{
+	+FCachedPassMeshDrawList CachedDrawLists[EMeshPass::Num]
 
-## FScene::AddPrimitiveSceneInfo_RenderThread
-将FPrimitiveSceneInfo添加到AddedPrimitiveSceneInfos中，等待FScene::UpdateAllPrimitiveSceneInfos中处理.
+	+TArray<FPrimitiveSceneInfo*> Primitives;
+	+TArray<FMatrix> PrimitiveTransforms;
+	+TArray<FPrimitiveSceneProxy*> PrimitiveSceneProxies;
+	+TArray<FPrimitiveBounds> PrimitiveBounds;
+	+TArray<FPrimitiveFlagsCompact> PrimitiveFlagsCompact;
+	+TArray<FPrimitiveVisibilityId> PrimitiveVisibilityIds;
+	+TArray<uint32> PrimitiveOctreeIndex;
+	+TArray<uint8> PrimitiveOcclusionFlags;
+	+TArray<FBoxSphereBounds> PrimitiveOcclusionBounds;
+	+TArray<FPrimitiveComponentId> PrimitiveComponentIds;
+	+TArray<FPrimitiveVirtualTextureFlags> PrimitiveVirtualTextureFlags;
+	+TArray<FPrimitiveVirtualTextureLodInfo> PrimitiveVirtualTextureLod;
 
-## FScene::UpdateAllPrimitiveSceneInfos
-处理FPrimitiveSceneInfo的添加、删除、修改。
-* 将新添加的FPrimitiveSceneInfo放到AddedLocalPrimitiveSceneInfos中，并排序准备使用.
-* 添加到FScene的Primitives中。 
-* 调用FPrimitiveSceneInfo::AddToScene，填充各种Primitive...信息
-***FScene中的各个Prmitive...数组包含了Primitive不同的信息。之所以好拆开是为了cache访问效率。FPrimitveSceneInfo->PackedIndex保存了这些数组的id***
+	+TSparseArray<FStaticMeshBatch*> StaticMeshes;
+}
+note right of FScene::"CachedDrawLists[EMeshPass::Num]"
+    所有cached FMeshDrawCommand列表
+end note
+note right of FScene::Primitives
+    The following arrays are densely packed primitive data needed by various  rendering passes. 
+    PrimitiveSceneInfo->PackedIndex maintains the index where data is stored in these arrays for a given primitive.
+end note
+note right of FScene::StaticMeshes
+    The static meshes in the scene
+end note
+```
 
-# FPrimitiveSceneProxy/FPrimitiveSceneInfo==>FMeshBatch
-## FPrimitiveSceneInfo::AddToScene
-* 调用FPrimitiveSceneInfo::AddStaticMeshes为StaticMesh添加FMeshBatch和FMeshDrawCommand,并缓存起来
-
-## FPrimitiveSceneInfo::AddStaticMeshes
-* 调用FPrimitiveSceneProxy->DrawStaticElements,创建FMeshBatch(FStaticMeshBatch)并保存到FPrimitiveSceneInfo->StaticMeshes。
-***StaticMesh会创建所有LOD层级的FMeshBatch***
-* 将FMeshBatch保存到FScene->StaticMeshes中，并将此数组id保存到FStaticMeshBatch和FStaticMeshBatchRelevance的id中
-* 调用CacheMeshDrawCommands缓存FMeshDrawCommand
-
-# FMeshBatch==>FMeshDrawCommand
+## FPrimitiveSceneInfo
+```puml
+!theme black-knight
+class FPrimitiveSceneInfo{
+	+TArray<class FCachedMeshDrawCommandInfo> StaticMeshCommandInfos;
+	+TArray<class FStaticMeshBatchRelevance> StaticMeshRelevances;
+	+TArray<class FStaticMeshBatch> StaticMeshes;
+}
+note right of FPrimitiveSceneInfo::StaticMeshCommandInfos
+	The primitive's cached mesh draw commands infos for all static meshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
+end note
+note right of FPrimitiveSceneInfo::StaticMeshRelevances
+	The primitive's static mesh relevances. Must be in sync with StaticMeshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
+end note
+note right of FPrimitiveSceneInfo::StaticMeshes
+	The primitive's static meshes.
+end note
+```
 ## EMeshPassFlags
 * CachedMeshCommands
 * MainView
@@ -91,56 +116,37 @@ FMeshPassProcessor<|--FBasePassMeshProcessor
 FMeshPassProcessor<|..OtherPassProcessor
 ```
 
-## FScene
-```puml
-!theme black-knight
-class FScene{
-	+FCachedPassMeshDrawList CachedDrawLists[EMeshPass::Num]
---
-	+TArray<FPrimitiveSceneInfo*> Primitives;
-	+TArray<FMatrix> PrimitiveTransforms;
-	+TArray<FPrimitiveSceneProxy*> PrimitiveSceneProxies;
-	+TArray<FPrimitiveBounds> PrimitiveBounds;
-	+TArray<FPrimitiveFlagsCompact> PrimitiveFlagsCompact;
-	+TArray<FPrimitiveVisibilityId> PrimitiveVisibilityIds;
-	+TArray<uint32> PrimitiveOctreeIndex;
-	+TArray<uint8> PrimitiveOcclusionFlags;
-	+TArray<FBoxSphereBounds> PrimitiveOcclusionBounds;
-	+TArray<FPrimitiveComponentId> PrimitiveComponentIds;
-	+TArray<FPrimitiveVirtualTextureFlags> PrimitiveVirtualTextureFlags;
-	+TArray<FPrimitiveVirtualTextureLodInfo> PrimitiveVirtualTextureLod;
+# StaticMesh
+## FScene::AddPrimitive
+* 创建FPrimitiveSceneProxy和FPrimitiveSceneInfo，并相互引用
+* RT:SceneProxy->CreateRenderThreadResources()
+* RT:Scene->AddPrimitiveSceneInfo_RenderThread
 
-}
-note right of FScene::"CachedDrawLists[EMeshPass::Num]"
-    所有cached FMeshDrawCommand列表
-end note
-note right of FScene::Primitives
-    The following arrays are densely packed primitive data needed by various  rendering passes. 
-    PrimitiveSceneInfo->PackedIndex maintains the index where data is stored in these arrays for a given primitive.
-end note
-```
+## FScene::AddPrimitiveSceneInfo_RenderThread
+将FPrimitiveSceneInfo添加到AddedPrimitiveSceneInfos中，等待FScene::UpdateAllPrimitiveSceneInfos中处理.
 
-## FPrimitiveSceneInfo
-```puml
-!theme black-knight
-class FPrimitiveSceneInfo{
-	+TArray<class FCachedMeshDrawCommandInfo> StaticMeshCommandInfos;
-	+TArray<class FStaticMeshBatchRelevance> StaticMeshRelevances;
-	+TArray<class FStaticMeshBatch> StaticMeshes;
-}
-note right of FPrimitiveSceneInfo::StaticMeshCommandInfos
-	The primitive's cached mesh draw commands infos for all static meshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
-end note
-note right of FPrimitiveSceneInfo::StaticMeshRelevances
-	The primitive's static mesh relevances. Must be in sync with StaticMeshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
-end note
-note right of FPrimitiveSceneInfo::StaticMeshes
-	The primitive's static meshes.
-end note
-```
+## FScene::UpdateAllPrimitiveSceneInfos
+处理FPrimitiveSceneInfo的添加、删除、修改。
+* 将新添加的FPrimitiveSceneInfo放到AddedLocalPrimitiveSceneInfos中，并排序准备使用.
+* 添加到FScene的Primitives中。 
+* 调用FPrimitiveSceneInfo::AddToScene，填充各种Primitive...信息
+***FScene中的各个Prmitive...数组包含了Primitive不同的信息。之所以好拆开是为了cache访问效率。FPrimitveSceneInfo->PackedIndex保存了这些数组的id***
+
+## FPrimitiveSceneInfo::AddToScene
+* 调用FPrimitiveSceneInfo::AddStaticMeshes为StaticMesh添加FMeshBatch和FMeshDrawCommand,并缓存起来
+
+## FPrimitiveSceneInfo::AddStaticMeshes
+* 调用FPrimitiveSceneProxy->DrawStaticElements,创建FMeshBatch(FStaticMeshBatch)并保存到FPrimitiveSceneInfo->StaticMeshes。
+***StaticMesh会创建所有LOD层级的FMeshBatch***
+* 将FMeshBatch保存到FScene->StaticMeshes中，并将此数组id保存到FStaticMeshBatch和FStaticMeshBatchRelevance的id中
+* 调用CacheMeshDrawCommands缓存FMeshDrawCommand
+
 
 ## FPrimitiveSceneInfo::CacheMeshDrawCommands
 缓存FMeshBatch对应的FMeshDrawCommand
+* [ ] 还没仔细看
+
+# DynamicMesh
 
 # References
 * [UE5 MeshDrawCommand](https://scahp.tistory.com/74)
