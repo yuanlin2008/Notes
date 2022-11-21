@@ -91,7 +91,37 @@ FMeshPassProcessor<|--FBasePassMeshProcessor
 FMeshPassProcessor<|..OtherPassProcessor
 ```
 
-* [ ] FPrimitiveSceneInfo::CacheMeshDrawCommands
+## FScene
+```puml
+!theme black-knight
+class FScene{
+	+FCachedPassMeshDrawList CachedDrawLists[EMeshPass::Num]
+}
+note right of FScene::"CachedDrawLists[EMeshPass::Num]"
+    所有cached FMeshDrawCommand列表
+end note
+```
+
+## FPrimitiveSceneInfo
+```puml
+!theme black-knight
+class FPrimitiveSceneInfo{
+	+TArray<class FCachedMeshDrawCommandInfo> StaticMeshCommandInfos;
+	+TArray<class FStaticMeshBatchRelevance> StaticMeshRelevances;
+	+TArray<class FStaticMeshBatch> StaticMeshes;
+}
+note right of FPrimitiveSceneInfo::StaticMeshCommandInfos
+	The primitive's cached mesh draw commands infos for all static meshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
+end note
+note right of FPrimitiveSceneInfo::StaticMeshRelevances
+	The primitive's static mesh relevances. Must be in sync with StaticMeshes. Kept separately from StaticMeshes for cache efficiency inside InitViews.
+end note
+note right of FPrimitiveSceneInfo::StaticMeshes
+	The primitive's static meshes.
+end note
+```
+
+## FPrimitiveSceneInfo::CacheMeshDrawCommands
 
 # References
 * [UE5 MeshDrawCommand](https://scahp.tistory.com/74)
