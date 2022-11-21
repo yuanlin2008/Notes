@@ -96,9 +96,27 @@ FMeshPassProcessor<|..OtherPassProcessor
 !theme black-knight
 class FScene{
 	+FCachedPassMeshDrawList CachedDrawLists[EMeshPass::Num]
+--
+	+TArray<FPrimitiveSceneInfo*> Primitives;
+	+TArray<FMatrix> PrimitiveTransforms;
+	+TArray<FPrimitiveSceneProxy*> PrimitiveSceneProxies;
+	+TArray<FPrimitiveBounds> PrimitiveBounds;
+	+TArray<FPrimitiveFlagsCompact> PrimitiveFlagsCompact;
+	+TArray<FPrimitiveVisibilityId> PrimitiveVisibilityIds;
+	+TArray<uint32> PrimitiveOctreeIndex;
+	+TArray<uint8> PrimitiveOcclusionFlags;
+	+TArray<FBoxSphereBounds> PrimitiveOcclusionBounds;
+	+TArray<FPrimitiveComponentId> PrimitiveComponentIds;
+	+TArray<FPrimitiveVirtualTextureFlags> PrimitiveVirtualTextureFlags;
+	+TArray<FPrimitiveVirtualTextureLodInfo> PrimitiveVirtualTextureLod;
+
 }
 note right of FScene::"CachedDrawLists[EMeshPass::Num]"
     所有cached FMeshDrawCommand列表
+end note
+note right of FScene::Primitives
+    The following arrays are densely packed primitive data needed by various  rendering passes. 
+    PrimitiveSceneInfo->PackedIndex maintains the index where data is stored in these arrays for a given primitive.
 end note
 ```
 
@@ -122,6 +140,7 @@ end note
 ```
 
 ## FPrimitiveSceneInfo::CacheMeshDrawCommands
+缓存FMeshBatch对应的FMeshDrawCommand
 
 # References
 * [UE5 MeshDrawCommand](https://scahp.tistory.com/74)
