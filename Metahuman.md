@@ -19,9 +19,10 @@ Epic skeleton
 # Body
 
 # Mocap
+https://www.bilibili.com/video/BV1FV4y1x7ZV/?spm_id_from=333.337.search-card.all.click
 * [Live Link Face](https://apps.apple.com/us/app/live-link-face/id1495370836)
 * [Rokoko](https://www.rokoko.com/)
-* [Neuron](https://neuronmocap.com/)
+* [Noitom](https://www.noitom.com.cn/)
 * **[VDSuit](http://www.vdsuit.com/)**
 # BP
 * SetLeaderPoseComponent
