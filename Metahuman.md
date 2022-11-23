@@ -1,3 +1,6 @@
+# Modules
+* LiveLinkAnimationCore
+
 # Plugins
 * Live Link
 * Live Link Control Rig
@@ -19,10 +22,15 @@ Epic skeleton
 ## Face
 ## Body
 
+# BP
+* SetLeaderPoseComponent
+* Post Animation Blueprint
+
 # TODO
+* [x] Animation Curve
+* [x] Morph target
+* [ ] Control Rig
 * [ ] Pose Asset
-* [ ] Morph target
-* [ ] Animation Curve
 * [ ] MH技术规格
 * [ ] ARKit原理
 * [ ] Body mocap
