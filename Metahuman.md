@@ -1,7 +1,17 @@
+```puml
+!theme black-knight
+
+object BP_Hana
+object Face_Anim_BP
+BP_Hana-->Face_Anim_BP:Face.AnimClass
+
+```
+
 # Modules
 * LiveLinkAnimationCore
 
 # Plugins
+## mh_arkit_mapping_anim needs
 * Live Link
 * Live Link Control Rig
 * Apple ARKit Face Support
@@ -40,3 +50,4 @@ https://www.bilibili.com/video/BV1FV4y1x7ZV/?spm_id_from=333.337.search-card.all
 
 # References
 * https://www.brasilliant.com/post/what-is-facs-rigging
+* https://stefanperales.com/blog/dynamic-ik-retargeting-in-ue5/
