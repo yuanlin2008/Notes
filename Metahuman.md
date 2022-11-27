@@ -1,7 +1,10 @@
 # Assets
 ## Face
-Face的skeletal的curves包含了Arkit和RigLogic的curves
-Face没有用MasterPose，而是从body拷贝过来的.
+### Face包含的Curve类型
+* RigLogic
+* Arkit
+* Material
+* MorphTarget
 ### Face_AnimBP
 从头body通过CopyPoseFromMesh拷贝动画姿势，处理livelink与身体动画的融合
 ### Face_PostProcess_AnimBP
