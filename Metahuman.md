@@ -60,6 +60,7 @@ https://www.bilibili.com/video/BV1FV4y1x7ZV/?spm_id_from=333.337.search-card.all
 
 
 # References
+* [Fix Mouth Gap in Lips](https://www.youtube.com/watch?v=zVDWAom65EI)
 * https://www.brasilliant.com/post/what-is-facs-rigging
 * https://stefanperales.com/blog/dynamic-ik-retargeting-in-ue5/
 * https://cdn2.unrealengine.com/rig-logic-whitepaper-v2-5c9f23f7e210.pdf

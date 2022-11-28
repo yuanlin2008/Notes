@@ -12,4 +12,3 @@
 
 ## References
 * https://www.youtube.com/watch?v=4WPzQqbKYUI
-* [Fix Mouth Gap in Lips](https://www.youtube.com/watch?v=zVDWAom65EI)
