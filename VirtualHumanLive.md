@@ -6,6 +6,8 @@
 * 外网:https://221.219.211.18:10010/svn/LiveShow/trunk
 
 ## todo
+* [ ] svn 账号
+* [ ] epic 账号
 * [ ] body mocap
 
 ## References
