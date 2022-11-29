@@ -45,6 +45,7 @@ https://www.bilibili.com/video/BV1FV4y1x7ZV/?spm_id_from=333.337.search-card.all
 * [VDSuit](http://www.vdsuit.com/)
 * [IPI](https://ipisoft.com/)
 * [Facegood](https://www.avatary.com/home)
+* [Move AI](https://www.move.ai/)
 # BP
 * SetLeaderPoseComponent
 * Post Animation Blueprint
