@@ -55,9 +55,10 @@ https://www.bilibili.com/video/BV1FV4y1x7ZV/?spm_id_from=333.337.search-card.all
 * [x] Morph target
 * [ ] Control Rig
 * [ ] Pose Asset
-* [ ] MH技术规格
-* [ ] ARKit原理
-* [ ] Body mocap
+* [x] MH技术规格
+* [x] ARKit原理
+* [x] Body mocap
+* [ ] DNA
 
 
 # References
