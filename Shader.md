@@ -47,6 +47,7 @@ IMPLEMENT_STATIC_UNIFORM_BUFFER_SLOT(SlotName)
 
 # References
 * [***RDG Programming Guide***](https://docs.unrealengine.com/5.1/en-US/render-dependency-graph-in-unreal-engine/)
+* [Unreal RenderGraph](https://zhuanlan.zhihu.com/p/101149903)
 * [***UE5 Shader***](https://scahp.tistory.com/78)
 * [UE4 Shader Introduction](https://logins.github.io/graphics/2021/03/31/UE4ShadersIntroduction.html)
 * [Adding a Global Uniform Shader Parameter](https://medium.com/@solaslin/learning-unreal-engine-4-adding-a-global-shader-uniform-1-b6d5500a5161)
