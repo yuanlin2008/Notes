@@ -3,6 +3,8 @@
 * [Understanding Move Semantics and Perfect Forwarding: Part 1](https://drewcampbell92.medium.com/understanding-move-semantics-and-perfect-forwarding-987cf4dc7e27)
 * [Rvalue reference in C++](https://medium.com/pranayaggarwal25/rvalue-references-e99dfd3933ff)
 * [C++ std::move and std::forward](https://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
+* [Value categories](https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/)
+* [ ] value categories(lvalue,xvalue,prvalue)
 
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
