@@ -4,10 +4,14 @@
 * [Rvalue reference in C++](https://medium.com/pranayaggarwal25/rvalue-references-e99dfd3933ff)
 * [C++ std::move and std::forward](https://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
 * [Value categories](https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/)
-* [ ] value categories(lvalue,xvalue,prvalue)
+* **Move Semantics - The Complete Guide**
 
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
 
 ## function default & delete
 * [Explicitly Defaulted and Deleted Functions in C++ 11](https://www.geeksforgeeks.org/explicitly-defaulted-deleted-functions-c-11/)
+
+## uniform initialization
+## auto
+## range-based for loop
