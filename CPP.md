@@ -13,5 +13,6 @@
 * [Explicitly Defaulted and Deleted Functions in C++ 11](https://www.geeksforgeeks.org/explicitly-defaulted-deleted-functions-c-11/)
 
 ## uniform initialization
-## auto
+## auto & decltype
+## static_cast
 ## range-based for loop
