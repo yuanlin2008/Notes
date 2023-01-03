@@ -14,6 +14,13 @@
 
 ## uniform initialization
 ## auto & decltype
+### auto function return type
 ## static_cast
+<<<<<<< HEAD
 ## noexcept
 ## range-based for loop
+=======
+## range-based for loop
+## volatile
+* [C/C++中的volatile使用時機?](https://freestyler.pixnet.net/blog/post/23872864)
+>>>>>>> 9173f580a5cfbb7f4721a05132d05d5a9fd3c70a
