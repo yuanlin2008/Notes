@@ -5,7 +5,7 @@
 * [C++ std::move and std::forward](https://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
 * [Value categories](https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/)
 * **Move Semantics - The Complete Guide**
-
+* [How std::move breaks return value optimization](https://diego.assencio.com/?index=f57f25fd5a187c70fc7f34fcf5374773)
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
 
@@ -15,4 +15,5 @@
 ## uniform initialization
 ## auto & decltype
 ## static_cast
+## noexcept
 ## range-based for loop
