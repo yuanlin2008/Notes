@@ -6,6 +6,7 @@
 * [Value categories](https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/)
 * **Move Semantics - The Complete Guide**
 * [How std::move breaks return value optimization](https://diego.assencio.com/?index=f57f25fd5a187c70fc7f34fcf5374773)
+* [C++ Reference Collapsing](https://leimao.github.io/blog/CPP-Reference-Collapsing/)
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
 
@@ -16,11 +17,8 @@
 ## auto & decltype
 ### auto function return type
 ## static_cast
-<<<<<<< HEAD
 ## noexcept
 ## range-based for loop
-=======
 ## range-based for loop
 ## volatile
 * [C/C++中的volatile使用時機?](https://freestyler.pixnet.net/blog/post/23872864)
->>>>>>> 9173f580a5cfbb7f4721a05132d05d5a9fd3c70a
