@@ -9,6 +9,7 @@
 * [How std::move breaks return value optimization](https://diego.assencio.com/?index=f57f25fd5a187c70fc7f34fcf5374773)
 * [C++ Reference Collapsing](https://leimao.github.io/blog/CPP-Reference-Collapsing/)
 * [**cpp**](https://irkos.org/cpp/)
+* [ ] c++ type deduction
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
 
