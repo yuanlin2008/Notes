@@ -5,6 +5,7 @@
 * [C++ std::move and std::forward](https://bajamircea.github.io/coding/cpp/2016/04/07/move-forward.html)
 * [Value categories](https://www.learncpp.com/cpp-tutorial/value-categories-lvalues-and-rvalues/)
 * **Move Semantics - The Complete Guide**
+* [**Universal References in C++11**](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
 
 ## using
 * [The differences between "using" and "typedef" in modern C++](https://www.internalpointers.com/post/differences-between-using-and-typedef-modern-c)
