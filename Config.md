@@ -16,4 +16,9 @@ ini查找路径
 ### FDataDrivenPlatformInfoRegistry
 保存每个platform对应的FDataDrivenPlatformInfo和所有的FPreviewPlatformMenuItem
 
-* [ ] FConfigCacheIni::AsyncInitializeConfigForPlatforms()
+## UObject
+* LoadConfig
+* SaveConfig
+
+## Hierarchy
+ConfigHierarchy.h

@@ -26,25 +26,16 @@ ID3D12DeviceChild<|--ID3D12RootSignature
 !theme black-knight
 package RHI {
 	class FRHIResource
+	class FRHIViewableResource
 	class FRHIBuffer
 	class FRHITexture
-	class FRHITexture2D
-	class FRHITexture2DArray
-	class FRHITexture3D
-	class FRHITextureCube
-	FRHIBuffer--|>FRHIResource
-	FRHITexture--|>FRHIResource
-	FRHITexture2D--|>FRHITexture
-	FRHITexture2DArray--|>FRHITexture2D
-	FRHITexture3D--|>FRHITexture
-	FRHITextureCube--|>FRHITexture
+	FRHIViewableResource--|>FRHIResource
+	FRHIBuffer--|>FRHIViewableResource
+	FRHITexture--|>FRHIViewableResource
 }
 package D3D12RHI {
 	class FD3D12Buffer #darkred
-	class FD3D12Texture2D #darkred
-	class FD3D12Texture2DArray #darkred
-	class FD3D12TextureCube #darkred
-	class FD3D12Texture3D #darkred
+	class FD3D12Texture #darkred
 	class FD3D12ResourceLocation {
 		-FD3D12BaseShaderResource Owner
 		-FD3D12Resource UnderlyingResource
@@ -60,19 +51,8 @@ package D3D12RHI {
 	FD3D12ResourceLocation*.*FD3D12BaseShaderResource
 	FD3D12BaseShaderResource<|--FD3D12Buffer
 	FD3D12Buffer--|>FRHIBuffer
-	FD3D12BaseShaderResource<|--FD3D12TextureBase
-	FD3D12TextureBase<|--FD3D12Texture3D
-	FD3D12Texture3D--|>FRHITexture3D
-	FD3D12BaseTexture2D--|>FRHITexture2D
-	FD3D12BaseTexture2DArray--|>FRHITexture2DArray
-	FD3D12BaseTextureCube--|>FRHITextureCube
-
-	FD3D12TextureBase<|--FD3D12Texture2D
-	FD3D12Texture2D--|>FD3D12BaseTexture2D
-	FD3D12TextureBase<|--FD3D12Texture2DArray
-	FD3D12Texture2DArray--|>FD3D12BaseTexture2DArray
-	FD3D12TextureBase<|--FD3D12TextureCube
-	FD3D12TextureCube--|>FD3D12BaseTextureCube
+	FD3D12BaseShaderResource<|--FD3D12Texture
+	FD3D12Texture--|>FRHITexture
 }
 
 ```
