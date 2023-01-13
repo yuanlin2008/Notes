@@ -1,5 +1,3 @@
-[toc]
-
 # Shader parameters
 ## FShaderParamterMetadata
 * Shader参数结构体的描述数据
@@ -41,7 +39,14 @@ IMPLEMENT_STATIC_UNIFORM_BUFFER_SLOT(SlotName)
 
 ### Parameter
 
+# GeneratedUniformBuffers.ush
+```cpp
+RENDERCORE_API void CacheUniformBufferIncludes(TMap<const TCHAR*, struct FCachedUniformBufferDeclaration>& Cache, EShaderPlatform Platform);
+
+```
+
 # TODO
+* [ ] FViewUniformShaderParameters
 * [ ] /Engine/Generated/GeneratedUniformBuffers.ush
 * [ ] ShaderCompiler.h cpp
 
@@ -50,6 +55,7 @@ IMPLEMENT_STATIC_UNIFORM_BUFFER_SLOT(SlotName)
 * [Unreal RenderGraph](https://zhuanlan.zhihu.com/p/101149903)
 * [***UE5 Shader***](https://scahp.tistory.com/78)
 * [UE4 Shader Introduction](https://logins.github.io/graphics/2021/03/31/UE4ShadersIntroduction.html)
-* [Adding a Global Uniform Shader Parameter](https://medium.com/@solaslin/learning-unreal-engine-4-adding-a-global-shader-uniform-1-b6d5500a5161)
+* [**Adding a Global Uniform Shader Parameter**](https://medium.com/@solaslin/learning-unreal-engine-4-adding-a-global-shader-uniform-1-b6d5500a5161)
 * https://alain.xyz/research/realtime-celestial-rendering
 * http://www.valentinkraft.de/compute-shader-in-unreal-tutorial/
+* [**UE4 HLSL 和 Shader 开发指南和技巧**](https://zhuanlan.zhihu.com/p/66288908)
